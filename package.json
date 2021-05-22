@@ -1,0 +1,20 @@
+{
+  "name": "node_tutorial",
+  "version": "1.0.0",
+  "description": "node tutorial",
+  "main": "tutorial1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1" ,
+    "start" : "node http_module.js" ,
+    "dev" : "nodemon tutorial1.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.0.1",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
