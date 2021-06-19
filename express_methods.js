@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
-let {people} = require('./data')
+let people = require('./routes/people')
+let auth = require('./routes/auth')
 
 //static files
 app.use(express.static('./public'))
@@ -11,33 +12,15 @@ app.use(express.json())
 //to parse url contents
 app.use(express.urlencoded({extended: false}))
 
-app.get('/api/people',(req,res)=>{
-    res.status(200).json({success: true,data: people})
-})
 
-app.post('/login',(req,res)=>{
-    const {name} = req.body;
-    // console.log(Name,req.body)
-    if(name)
-    {
-        return res.status(200).send(`welcome ${name}`)
-    }
+//route handling for /login
+app.use('/login',auth)
 
-    res.status(401).send('please provide credentials')
-})
+//route handling for /api/people
+app.use('/api/people',people)
 
-app.post('/api/people',(req,res)=>{
-    const {name} = req.body
-    //console.log(name)
-    if(!name)
-    {
-        //console.log('name error')
-        return res.status(400).json({success:false,msg:'please provide name'})
-    }
 
-    res.status(201).json({success:true,person: name})
-})
-
+//setup port 
 app.listen(5000,()=>{
     console.log('server listening at port 5000 ...')
 })
